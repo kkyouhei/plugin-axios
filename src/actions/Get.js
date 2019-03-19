@@ -19,7 +19,9 @@ export default class Get extends Action {
     this.onRequest(commit);
     request
       .then(data => this.onSuccess(commit, model, data))
-      .catch(error => this.onError(commit, error))
+      .catch(error => {
+        this.onError(commit, error)
+      })
 
     return request;
   }
@@ -40,6 +42,8 @@ export default class Get extends Action {
    */
   static onSuccess(commit, model, data) {
     commit('onSuccess')
+    console.log('data')
+    console.log(data)
     model.insertOrUpdate({
       data,
     });
